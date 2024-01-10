@@ -10,6 +10,13 @@
     align-items: center;
 }
 
+.landscape-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 #main-landscape img{
     border-radius: 100px;
     width: 400px;
@@ -58,7 +65,7 @@
 }
 
 .split_area .text_content{
-    margin: 50px 50px;
+    margin: 50px;
 }
 
 
@@ -84,4 +91,28 @@
  .fadeInClass {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
+  }
+  
+
+  @media screen and (max-width: 600px) {
+    #main-landscape img{
+        width: 300px;
+    }
+
+    .split_area{
+        height: auto;
+        flex-direction: column;
+    }
+
+    .image_area{
+        width: 100%;
+    }
+
+    .text_area{
+        width: 100%;
+    }
+
+    .split_area .text_content{
+        margin: 10px 30px;
+    }
   }
