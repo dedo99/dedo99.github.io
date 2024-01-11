@@ -1,0 +1,3 @@
+ng build
+npm install -g angular-cli-ghpages
+ngh --dir=dist/andreadedonato
