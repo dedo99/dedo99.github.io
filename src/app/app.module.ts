@@ -8,6 +8,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppScrollAnimationDirective } from './app-scroll-animation.directive';
 import { FooterComponent } from './footer/footer.component';
+import { BlogComponent } from './blog/blog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 @NgModule({
@@ -16,12 +19,15 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     HomepageComponent,
     AppScrollAnimationDirective,
-    FooterComponent
+    FooterComponent,
+    BlogComponent,
+    PostDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

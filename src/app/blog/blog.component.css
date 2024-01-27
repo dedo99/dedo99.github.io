@@ -1,0 +1,19 @@
+p, h1, h2, h3, h4{
+    text-align: center;
+    color: white;
+}
+
+.post_box{
+    border-radius: 20px;
+    height: 50px;
+    width: 70%;
+    margin: 10px 15%;
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-around;
+}
+
+.post_box:hover{
+    background-color: orange;
+    transition-duration: 0.5s;
+}
