@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { Post } from '../models/post.model';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
-export class BlogComponent {
+export class BlogComponent implements OnInit {
 
   post_list: Post[] = [];
 
@@ -50,7 +50,12 @@ export class BlogComponent {
   }
 
   redirectToPostDatails(post: Post): void{
-    this.router.navigate(['/post', post.id])
+    let navigationExtras: NavigationExtras = {
+      state: {
+        post: post
+      }
+    };
+    this.router.navigate(['/post'], navigationExtras);
   }
 
 }

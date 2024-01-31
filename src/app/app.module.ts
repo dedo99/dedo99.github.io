@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BlogComponent } from './blog/blog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     AppScrollAnimationDirective,
     FooterComponent,
     BlogComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

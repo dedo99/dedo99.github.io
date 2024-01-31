@@ -2,7 +2,29 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 65px;
     width: 100%;
     background-color: #10a939;
+}
+
+.footer-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.copyright{
+    text-align: center;
+}
+
+.social-links{
+    text-align: center;
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.social-links i{
+    color: black;
 }

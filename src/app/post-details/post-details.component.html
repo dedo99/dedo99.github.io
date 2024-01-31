@@ -1,2 +1,7 @@
-<div class="container_html" [innerHTML]=post_html></div>
+
+<div class="container_post">
+    <h1>{{post?.title}}</h1>
+    <h3>{{post?.category}} - {{post?.date}}</h3>
+    <div class="container_html" [innerHTML]=post_html></div>
+</div>
 

@@ -1,3 +1,12 @@
+ng update @angular/cli
+npm install --save-dev @angular-devkit/build-angular
+
+#External Dependecies
+npm install bootstrap
+npm install @fortawesome/fontawesome-free
+
+#Deploy su ghpages per sito statico
+
 ng build
 npm install -g angular-cli-ghpages
 ngh --dir=dist/andreadedonato

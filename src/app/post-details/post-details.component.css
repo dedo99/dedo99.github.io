@@ -11,7 +11,7 @@ p{
 }
 
 
-.container_html{
+.container_html, .container_post{
     display: flex;
     flex-direction: column;
     align-items: center;

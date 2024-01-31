@@ -1,0 +1,5 @@
+#main_section{
+    min-height: calc(100vh - 130px);
+    width: 100%;
+    background-color: black
+}
