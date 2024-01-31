@@ -31,3 +31,16 @@ img{
     border-radius: 20px;
     text-align: justify;
 }
+
+
+
+@media screen and (max-width: 600px) {
+    img{
+        width: 80vw;
+    }
+
+    p{
+        padding: 10px;
+        margin: 10px;
+    }
+}

@@ -1,16 +1,17 @@
-<h1>Tutti i Post</h1>
-<div *ngFor="let post of post_list" class="post_box" (click)="redirectToPostDatails(post)">
-    <div>
-        <b>Title:</b>
-        <p>{{post.title}}</p>
-    </div>
-    <div>
-        <b>Category:</b>
-        <p>{{post.category}}</p>
-    </div>
-    <div>
-        <b>Date:</b>
-        <p>{{post.date}}</p>
-    </div>
-</div>
-
+<section id="blog_section">
+    <h1>Tutti i Post</h1>
+    <div *ngFor="let post of post_list" class="post_box" (click)="redirectToPostDatails(post)">
+        <div>
+            <b>Title:</b>
+            <p>{{post.title}}</p>
+        </div>
+        <div>
+            <b>Category:</b>
+            <p>{{post.category}}</p>
+        </div>
+        <div>
+            <b>Date:</b>
+            <p>{{post.date}}</p>
+        </div>
+    </div>    
+</section>
