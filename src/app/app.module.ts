@@ -12,6 +12,7 @@ import { BlogComponent } from './blog/blog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { AboutComponent } from './about/about.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AboutComponent } from './about/about.component';
     FooterComponent,
     BlogComponent,
     PostDetailsComponent,
-    AboutComponent
+    AboutComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
