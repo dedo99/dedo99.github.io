@@ -1,6 +1,5 @@
 <app-header [title]="title"></app-header>
-<section id="main_section">
-    <router-outlet></router-outlet>
+<section id="main_section" [@routeAnimations]="prepareRoute(outlet)" style="background-color: black;">
+    <router-outlet #outlet="outlet"></router-outlet>
 </section>
 <app-footer></app-footer>
-

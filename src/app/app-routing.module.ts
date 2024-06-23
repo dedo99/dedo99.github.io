@@ -7,9 +7,9 @@ import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
-  {path: "post", component: PostDetailsComponent},
+  {path: "blog", component: BlogComponent, data: { animation: 'BlogPage' } },
+  {path: "post", component: PostDetailsComponent, data: { animation: 'PostPage' }},
   {path: "homepage", component: HomepageComponent},
-  {path: "blog", component: BlogComponent},
   {path: "about", component: AboutComponent},
 ];
 
