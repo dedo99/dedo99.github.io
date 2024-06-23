@@ -4,5 +4,5 @@ export interface Post{
     category: string,
     content: string,
     image: string,
-    date: string;
+    date: Date;
 }
