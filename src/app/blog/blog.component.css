@@ -48,6 +48,10 @@ b{
     height: 130px;
 }
 
+mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
 @media screen and (max-width: 600px) {
     .post_box{

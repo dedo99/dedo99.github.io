@@ -9,8 +9,10 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
   post_list: Post[] = [];
+  filteredPosts: Post[] = [];
+  uniqueTopics: string[] = [];
+  selectedTopic: string = 'all';
 
   constructor(private postService: PostService, private router: Router) { }
 
@@ -22,6 +24,8 @@ export class BlogComponent implements OnInit {
     this.postService.getCsvData('assets/posts_data.csv').subscribe(
       data => {
         this.post_list = this.parseCsvData(data);
+        this.filteredPosts = this.post_list;
+        this.uniqueTopics = this.getUniqueTopics();
         console.log(this.post_list)
       },
       error => {
@@ -47,6 +51,19 @@ export class BlogComponent implements OnInit {
       posts.push(post);
     }
     return posts;
+  }
+
+  getUniqueTopics(): string[] {
+    const topics = this.post_list.map(post => post.category);
+    return Array.from(new Set(topics));
+  }
+
+  filterPostsByTopic(): void {
+    if (this.selectedTopic === 'all') {
+      this.filteredPosts = this.post_list;
+    } else {
+      this.filteredPosts = this.post_list.filter(post => post.category === this.selectedTopic);
+    }
   }
 
   redirectToPostDatails(post: Post): void{

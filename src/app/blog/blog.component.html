@@ -1,6 +1,18 @@
 <section id="blog_section">
     <h1>Tutti i Post</h1>
-    <div *ngFor="let post of post_list" class="post_box" (click)="redirectToPostDatails(post)">
+
+    <div>
+        <mat-form-field appearance="fill" color="accent">
+          <mat-label>Seleziona un topic</mat-label>
+          <mat-select [(ngModel)]="selectedTopic" (selectionChange)="filterPostsByTopic()">
+            <mat-option value="all">Tutti</mat-option>
+            <mat-option *ngFor="let topic of uniqueTopics" [value]="topic">{{ topic }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+      
+
+    <div *ngFor="let post of filteredPosts" class="post_box" (click)="redirectToPostDatails(post)">
         <div>
             <img src="{{post.image}}" alt="Image_post">
         </div>
