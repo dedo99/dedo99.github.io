@@ -4,6 +4,7 @@ import { AnimationService } from '../animation.service';
 import { ViewportScroller } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SpinnerService } from '../spinner.service';
 
 
 @Component({
@@ -23,10 +24,24 @@ export class HomepageComponent implements OnInit, OnDestroy{
 
   isVisible = 'hidden';
 
-  constructor(private viewportScroller: ViewportScroller, titleService: TitleService) {}
+  constructor(private viewportScroller: ViewportScroller, titleService: TitleService, private spinnerService: SpinnerService) {}
+
+  isLoading = false;
 
   ngOnInit() {
     this.handleScrollEvents();
+
+    if (!this.spinnerService.hasHomepageLoaded()) {
+      this.isLoading = true;
+      this.spinnerService.show();
+      
+      // Simula un caricamento asincrono
+      setTimeout(() => {
+        this.spinnerService.hide();
+        this.isLoading = false;
+      }, 500); // Simula un caricamento di 3 secondi
+    }
+
   }
 
   ngOnDestroy() {

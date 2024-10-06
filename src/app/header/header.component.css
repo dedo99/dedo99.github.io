@@ -13,6 +13,10 @@
     height: 65px;
 }
 
+#title_site{
+    margin: 0px 60px;
+}
+
 .navlink{
     display: flex;
     align-items: center;
@@ -26,3 +30,10 @@ a{
     text-decoration: none;
 }
 
+@media screen and (max-width: 600px) {
+
+    #title_site{
+        margin: 0px 30px;
+    }
+    
+}

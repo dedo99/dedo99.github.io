@@ -13,7 +13,7 @@ import { PostService } from '../services/post.service';
 export class PostDetailsComponent {
 
   post_html?: string;
-  post?: Post;
+  post!: Post;
 
   constructor(private route: ActivatedRoute, private postService: PostService, private router: Router) {
     const navigation = this.router.getCurrentNavigation();

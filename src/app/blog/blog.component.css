@@ -28,7 +28,7 @@ b{
 
 .post_box{
     border-radius: 20px;
-    height: 50px;
+    height: 140px;
     width: 70%;
     margin: 10px 0px;
     border: 2px solid #363636;
@@ -43,16 +43,37 @@ b{
     transition-duration: 0.5s;
 }
 
+.post_box img{
+    border-radius: 20px;
+    height: 130px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
 @media screen and (max-width: 600px) {
     .post_box{
         flex-direction: column;
         height: auto;
-        align-items: flex-start;
+        align-items: center;
         padding: 10px;
     }
 
     .post_box p{
         text-align: justify;
     }
+
+    .post_box div{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .post_box img{
+        border-radius: 20px;
+        height: 130px;
+    }
+
 }
