@@ -64,6 +64,7 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnDestroy() {
+    window.removeEventListener('resize', this.debouncedAdjustCanvasSize);
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
