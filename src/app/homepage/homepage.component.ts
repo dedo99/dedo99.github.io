@@ -31,6 +31,8 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   ngOnInit() {
     this.handleScrollEvents();
 
+    window.addEventListener('resize', () => this.adjustCanvasSize());
+
     if (!this.spinnerService.hasHomepageLoaded()) {
       this.isLoading = true;
       this.spinnerService.show();
@@ -44,6 +46,12 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
 
   }
 
+  private adjustCanvasSize(): void {
+    const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
@@ -51,14 +59,73 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
 
   ngAfterViewInit(): void {
     setTimeout(() =>  {
+      this.createMatrixEffect();
+    }, 1000)
+    setTimeout(() =>  {
       this.animateText();
     }, 3000)
+  }
+
+
+  private createMatrixEffect(): void {
+    const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d')!;
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  
+    const fontSize = 16; // Dimensione del font
+    const columns = canvas.width / fontSize; // Numero di colonne di testo
+    const drops: number[] = Array(Math.floor(columns)).fill(1); // Posizioni iniziali
+  
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // Caratteri inglesi
+  
+    const draw = () => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Effetto dissolvenza
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+      ctx.fillStyle = '#0F0'; // Colore verde
+      ctx.font = `${fontSize}px monospace`; // Font
+  
+      drops.forEach((y, index) => {
+        const text = characters[Math.floor(Math.random() * characters.length)]; // Genera caratteri casuali
+        const x = index * fontSize;
+  
+        ctx.fillText(text, x, y * fontSize);
+  
+        // Randomizza il reset della colonna
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[index] = 0;
+        }
+  
+        drops[index]++;
+      });
+    };
+  
+    setInterval(draw, 50);
   }
 
   private animateText(): void {
     const text = document.getElementById('animated-text') as HTMLElement;
 
-    console.log(text)
+    if (!text) {
+      console.error('Elemento #animated-text non trovato');
+      return;
+    }
+  
+    // Calcola la dimensione del font in base alla larghezza dello schermo
+    const updateFontSize = () => {
+      const screenWidth = window.innerWidth; // Larghezza dello schermo
+      const fontSize = Math.max(16, Math.min(32, screenWidth / 30)); // Calcola il font tra 16px e 32px
+      text.style.fontSize = `${fontSize}px`; // Applica la dimensione del font
+    };
+  
+    // Aggiorna la dimensione del font al caricamento
+    updateFontSize();
+  
+    // Aggiungi un listener per aggiornare il font al ridimensionamento
+    window.addEventListener('resize', updateFontSize);
+  
       
     const textContent = 'Andrea de Donato';  // Il testo da animare
     const letters = textContent.split('');  // Spezza il testo in singole lettere
