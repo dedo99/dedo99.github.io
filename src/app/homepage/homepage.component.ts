@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { TitleService } from '../title.service';
 import { AnimationService } from '../animation.service';
 import { ViewportScroller } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SpinnerService } from '../spinner.service';
-
+import anime from 'animejs/lib/anime.es.js';
 
 @Component({
   selector: 'app-homepage',
@@ -16,7 +16,7 @@ import { SpinnerService } from '../spinner.service';
                AnimationService.fadeInOnScroll,
                AnimationService.slideInOnScroll],
 })
-export class HomepageComponent implements OnInit, OnDestroy{
+export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
 
   title ?: string;
   
@@ -47,6 +47,45 @@ export class HomepageComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() =>  {
+      this.animateText();
+    }, 3000)
+  }
+
+  private animateText(): void {
+    const text = document.getElementById('animated-text') as HTMLElement;
+
+    console.log(text)
+      
+    const textContent = 'Andrea de Donato';  // Il testo da animare
+    const letters = textContent.split('');  // Spezza il testo in singole lettere
+    let currentText = '';  // Stringa che conterrà il testo progressivo
+    let letterIndex = 0;
+
+    // Fai apparire il testo con l'animazione di opacità
+    anime({
+      targets: text,
+      opacity: [0, 1],  // Inizia con opacità 0 e va fino a 1
+      duration: 1000,  // Durata totale per l'opacità
+      easing: 'easeOutQuad',
+    });
+
+    // Scrivere lettera per lettera
+    const interval = setInterval(() => {
+      currentText += letters[letterIndex];  // Aggiunge una lettera alla stringa
+      text.textContent = currentText;  // Aggiorna il testo nell'elemento
+      letterIndex++;
+
+      if (letterIndex === letters.length) {
+        clearInterval(interval);  // Ferma l'animazione quando tutte le lettere sono state aggiunte
+      }
+    }, 100);  // Ritardo di 100ms tra le lettere
+
+
+    console.log('Terminato')
   }
 
   private handleScrollEvents() {

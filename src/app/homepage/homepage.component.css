@@ -10,6 +10,28 @@
     align-items: center;
 }
 
+#animated-text {
+    font-family: 'Arial', sans-serif; /* Cambia con il font che preferisci */
+    font-size: 40px; /* Dimensione del testo */
+    font-weight: bold; /* Rende il testo in grassetto */
+    color: #3498db; /* Colore blu per il testo */
+    letter-spacing: 2px; /* Distanza tra le lettere */
+    text-transform: uppercase; /* Rende il testo tutto maiuscolo */
+    text-align: center; /* Allinea il testo al centro */
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #3498db, #9b59b6); /* Colore di sfondo con gradiente */
+    background-clip: text; /* Fai sì che il gradiente venga applicato al testo */
+    -webkit-background-clip: text; /* Supporto per Webkit-based browsers (Chrome, Safari) */
+    transition: all 0.3s ease; /* Aggiungi una transizione fluida quando il testo cambia */
+  }
+  
+  #animated-text:hover {
+    color: #f1c40f; /* Colore giallo durante il passaggio del mouse */
+    text-shadow: 0 0 25px #10a939, 0 0 40px rgba(79, 163, 0, 0.7); /* Effetto di glow quando il mouse è sopra */
+    transform: scale(1.1); /* Leggero ingrandimento quando il mouse è sopra */
+  }
+
 .landscape-content{
     display: flex;
     justify-content: center;
