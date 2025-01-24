@@ -31,14 +31,12 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   private drops: number[] = [];
 
   ngOnInit() {
-    this.handleScrollEvents(); // Mantieni per altri scopi legati allo scroll
-
     window.addEventListener('resize', this.debouncedAdjustCanvasSize.bind(this));
-
+  
     if (!this.spinnerService.hasHomepageLoaded()) {
       this.isLoading = true;
       this.spinnerService.show();
-
+  
       setTimeout(() => {
         this.spinnerService.hide();
         this.isLoading = false;
@@ -48,12 +46,12 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
 
   private debouncedAdjustCanvasSize = (() => {
     let timeout: ReturnType<typeof setTimeout>;
-
+  
     return () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         this.adjustCanvasSize();
-      }, 200); // Delay di 200 ms
+      }, 200); // Delay di 200ms
     };
   })();
 
@@ -83,34 +81,40 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
     const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!;
     
+    if (!canvas || !ctx) {
+      console.error('Canvas o contesto non trovato!');
+      return;
+    }
+  
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   
-    const fontSize = 16; // Dimensione del font
-    const columns = canvas.width / fontSize; // Numero di colonne di testo
-    const drops: number[] = Array(Math.floor(columns)).fill(1); // Posizioni iniziali
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
   
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // Caratteri inglesi
+    // Mantieni lo stato delle gocce
+    this.drops = this.drops.length ? this.drops : Array(Math.floor(columns)).fill(1);
+  
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   
     const draw = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Effetto dissolvenza
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
   
-      ctx.fillStyle = '#0F0'; // Colore verde
-      ctx.font = `${fontSize}px monospace`; // Font
+      ctx.fillStyle = '#0F0';
+      ctx.font = `${fontSize}px monospace`;
   
-      drops.forEach((y, index) => {
-        const text = characters[Math.floor(Math.random() * characters.length)]; // Genera caratteri casuali
+      this.drops.forEach((y, index) => {
+        const text = characters[Math.floor(Math.random() * characters.length)];
         const x = index * fontSize;
   
         ctx.fillText(text, x, y * fontSize);
   
-        // Randomizza il reset della colonna
         if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[index] = 0;
+          this.drops[index] = 0;
         }
   
-        drops[index]++;
+        this.drops[index]++;
       });
     };
   
@@ -183,23 +187,22 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   
       timeout = setTimeout(() => {
         const newVisibility = this.isElementInView(rect) ? 'visible' : 'hidden';
-        
+  
         if (this.isVisible !== newVisibility) {
           this.isVisible = newVisibility;
         }
-      }, 20); // Aggiungi un ritardo di 100 millisecondi
+      }, 20); // Ritardo di 20 millisecondi per evitare troppi aggiornamenti
     };
   
     handleScroll(); // Controllo iniziale
   
     window.addEventListener('scroll', handleScroll);
   
-    // Unsubscribe from scroll events when component is destroyed
+    // Rimuovi l'event listener quando il componente è distrutto
     this.onDestroy$.pipe(takeUntil(this.onDestroy$)).subscribe(() => {
       window.removeEventListener('scroll', handleScroll);
     });
   }
-
   private isElementInView(rect: DOMRect) {
     return (
       (rect.top >= 100 && 
