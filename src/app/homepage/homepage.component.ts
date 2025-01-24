@@ -31,8 +31,8 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   private drops: number[] = [];
 
   ngOnInit() {
-    window.addEventListener('resize', this.debouncedAdjustCanvasSize.bind(this));
-  
+    window.addEventListener('resize', () => this.adjustCanvasSizeOnResize());
+      
     if (!this.spinnerService.hasHomepageLoaded()) {
       this.isLoading = true;
       this.spinnerService.show();
@@ -44,16 +44,17 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
-  private debouncedAdjustCanvasSize = (() => {
-    let timeout: ReturnType<typeof setTimeout>;
+  private isMobileDevice(): boolean {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
   
-    return () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        this.adjustCanvasSize();
-      }, 200); // Delay di 200ms
-    };
-  })();
+  private adjustCanvasSizeOnResize(): void {
+    if (this.isMobileDevice()) {
+      console.log('Mobile device detected, skipping resize on scroll.');
+      return; // Non ridimensionare su dispositivi mobili
+    }
+    this.adjustCanvasSize();
+  }
 
   private adjustCanvasSize(): void {
     const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
@@ -62,7 +63,6 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnDestroy() {
-    window.removeEventListener('resize', this.debouncedAdjustCanvasSize);
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
