@@ -28,23 +28,34 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
 
   isLoading = false;
 
-  ngOnInit() {
-    this.handleScrollEvents();
+  private drops: number[] = [];
 
-    window.addEventListener('resize', () => this.adjustCanvasSize());
+  ngOnInit() {
+    this.handleScrollEvents(); // Mantieni per altri scopi legati allo scroll
+
+    window.addEventListener('resize', this.debouncedAdjustCanvasSize.bind(this));
 
     if (!this.spinnerService.hasHomepageLoaded()) {
       this.isLoading = true;
       this.spinnerService.show();
-      
-      // Simula un caricamento asincrono
+
       setTimeout(() => {
         this.spinnerService.hide();
         this.isLoading = false;
       }, 500); // Simula un caricamento di 3 secondi
     }
-
   }
+
+  private debouncedAdjustCanvasSize = (() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    return () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        this.adjustCanvasSize();
+      }, 200); // Delay di 200 ms
+    };
+  })();
 
   private adjustCanvasSize(): void {
     const canvas = document.getElementById('matrix-canvas') as HTMLCanvasElement;
