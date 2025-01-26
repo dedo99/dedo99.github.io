@@ -22,7 +22,6 @@
 
 #animated-text {
     font-family: 'Arial', sans-serif; /* Cambia con il font che preferisci */
-    font-size: 40px; /* Dimensione del testo */
     font-weight: bold; /* Rende il testo in grassetto */
     color: #3498db; /* Colore blu per il testo */
     letter-spacing: 2px; /* Distanza tra le lettere */
@@ -164,6 +163,7 @@
 
     .image_area{
         width: 100%;
+        margin: 20px 0px;
     }
 
     .text_area{
@@ -176,6 +176,7 @@
 
     .split_area .text_content{
         margin: 0px 10px;
+        padding: 0px 25px;
     }
 
     .split_area .text_content p{

@@ -132,7 +132,7 @@ export class HomepageComponent implements OnInit, OnDestroy, AfterViewInit{
     // Calcola la dimensione del font in base alla larghezza dello schermo
     const updateFontSize = () => {
       const screenWidth = window.innerWidth; // Larghezza dello schermo
-      const fontSize = Math.max(16, Math.min(32, screenWidth / 30)); // Calcola il font tra 16px e 32px
+      const fontSize = Math.max(16, Math.min(32, screenWidth / 20)); // Calcola il font tra 16px e 32px
       text.style.fontSize = `${fontSize}px`; // Applica la dimensione del font
     };
   
