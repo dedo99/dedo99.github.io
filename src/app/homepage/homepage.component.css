@@ -70,7 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #363636;
+    background-color: #1c1c1e;
     border-bottom: 3px solid black;
 }
 
@@ -83,8 +83,9 @@
 }
 
 .image_content{
-    width: 400px;
-    height: 400px;
+    width: auto;
+    height: auto;
+    padding: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,7 +100,6 @@
 
 .image_content img{
     width: 80%;
-    border-radius: 100px;
 }
 
 .split_area .text_content{
@@ -114,15 +114,17 @@
 .split_area .text_content h1{
     font-size: xx-large;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     color: #10a939;
 }
 
 .split_area .text_content p{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: medium;
+    font-size: 20px;
     color: white;
+    line-height: 140%;
+    text-align: justify;
 }
 
 /*
@@ -157,6 +159,7 @@
     .split_area{
         height: auto;
         flex-direction: column;
+        padding: 20px 0px;
     }
 
     .image_area{
@@ -165,6 +168,10 @@
 
     .text_area{
         width: 100%;
+    }
+
+    .split_area .image_content{
+        padding: 0px;
     }
 
     .split_area .text_content{
