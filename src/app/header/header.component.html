@@ -6,7 +6,7 @@
         <a routerLink="/blog">Blog</a>
         <a routerLink="/about">About</a>
     </div>
-    <button class="hamburger" (click)="toggleMenu()">
+    <button class="hamburger" [class.open]="isMenuOpen" (click)="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
